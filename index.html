@@ -15,10 +15,18 @@
     <title>What's my IP</title>
 </head>
 <body>
-    <h1>Your IP address is:</h1>
-    <?php
-    $ip = $_SERVER['REMOTE_ADDR'];
-    echo "<p>$ip</p>";
-    ?>
+    <h1>Your IP address:</h1>
+    <p id="ip"></p>
+    <script>
+        function getIP() {
+            fetch('https://api64.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip').innerText = data.ip;
+                })
+                .catch(error => console.error(error));
+        }
+        window.onload = getIP;
+    </script>
 </body>
 </html>
